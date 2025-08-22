@@ -1,12 +1,12 @@
 name: Daily Birthday Notifications
 
+# Run every day at 14:00 AM UTC (adjust timezone as needed)
 on:
   schedule:
-    # Runs every day at 11:00 AM Buenos Aires time (14:00 UTC)
-    - cron: '0 14 * * *'
+    - cron: '1 4 * * *'  # 14:00 AM UTC daily
   
   # Allow manual triggering for testing
-  workflow_dispatch:n
+  workflow_dispatch:
 
 jobs:
   send-notifications:
