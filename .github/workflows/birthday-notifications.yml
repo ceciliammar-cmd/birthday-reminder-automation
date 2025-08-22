@@ -1,4 +1,4 @@
-ame: Daily Birthday Notifications
+name: Daily Birthday Notifications
 
 on:
   schedule:
@@ -6,7 +6,7 @@ on:
     - cron: '0 14 * * *'
   
   # Allow manual triggering for testing
-  workflow_dispatch:
+  workflow_dispatch:n
 
 jobs:
   send-notifications:
