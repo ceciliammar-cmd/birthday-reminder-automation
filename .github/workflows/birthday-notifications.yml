@@ -3,7 +3,7 @@ name: Daily Birthday Notifications
 # Run every day at 14:00 AM UTC (adjust timezone as needed)
 on:
   schedule:
-    - cron: '1 4 * * *'  # 14:00 AM UTC daily
+    - cron: '0 14 * * *'  # 14:00 AM UTC daily
   
   # Allow manual triggering for testing
   workflow_dispatch:
