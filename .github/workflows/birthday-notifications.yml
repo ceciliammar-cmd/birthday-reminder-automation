@@ -1,9 +1,9 @@
-name: Daily Birthday Notifications
+ame: Daily Birthday Notifications
 
-# Run every day at 9:00 AM UTC (adjust timezone as needed)
 on:
   schedule:
-    - cron: '0 9 * * *'  # 9:00 AM UTC daily
+    # Runs every day at 11:00 AM Buenos Aires time (14:00 UTC)
+    - cron: '0 14 * * *'
   
   # Allow manual triggering for testing
   workflow_dispatch:
