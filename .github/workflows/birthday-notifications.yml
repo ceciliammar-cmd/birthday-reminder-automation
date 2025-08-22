@@ -1,0 +1,43 @@
+name: Daily Birthday Notifications
+
+# Run every day at 9:00 AM UTC (adjust timezone as needed)
+on:
+  schedule:
+    - cron: '0 9 * * *'  # 9:00 AM UTC daily
+  
+  # Allow manual triggering for testing
+  workflow_dispatch:
+
+jobs:
+  send-notifications:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Send Birthday Notifications
+      run: |
+        echo "Checking for birthdays to notify..."
+        
+        # Call your birthday check endpoint
+        response=$(curl -s -w "HTTPSTATUS:%{http_code}" -X POST \
+          -H "Content-Type: application/json" \
+          -d '{}' \
+          https://bdayremind.floot.app/_api/notifications/check-birthdays)
+        
+        # Extract HTTP status
+        http_code=$(echo $response | tr -d '\n' | sed -e 's/.*HTTPSTATUS://')
+        body=$(echo $response | sed -E 's/HTTPSTATUS:[0-9]{3}$//')
+        
+        echo "Response: $body"
+        echo "HTTP Status: $http_code"
+        
+        if [ $http_code -eq 200 ]; then
+          echo "✅ Birthday notifications sent successfully!"
+        else
+          echo "❌ Failed to send notifications (HTTP $http_code)"
+          echo "Response body: $body"
+          exit 1
+        fi
+
+    - name: Log Completion
+      run: |
+        echo "Birthday notification check completed at $(date)"
